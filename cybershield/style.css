@@ -16,3 +16,90 @@ section {
 h1, h2 {
     color: #2c3e50;
 }
+
+/* --- MODULE 1 : ANALYSEUR DE MOT DE PASSE --- */
+.progress-container {
+    width: 100%;
+    background-color: #e0e0e0;
+    border-radius: 8px;
+    height: 20px;
+    margin: 15px 0;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%; /* Par défaut, la barre est vide */
+    transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+/* --- AMÉLIORATION DU MODULE 1 --- */
+
+/* Groupe label + input */
+.input-group {
+    display: flex;
+    flex-direction: column; /* Place le texte au-dessus du champ */
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #2c3e50;
+    font-size: 1.1rem;
+}
+
+/* Le champ de saisie du mot de passe */
+#password-input {
+    width: 100%; /* Prend toute la largeur de son conteneur */
+    max-width: 400px; /* Évite qu'il soit gigantesque sur grand écran */
+    padding: 12px 15px; /* Aère l'intérieur (corrige le texte coupé) */
+    font-size: 16px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px; /* Bords arrondis */
+    transition: all 0.3s ease; /* Animation fluide */
+}
+
+/* Effet quand l'utilisateur clique dans le champ (focus) */
+#password-input:focus {
+    outline: none;
+    border-color: #3498db; /* Un joli bleu moderne */
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
+}
+
+/* Encadrement de la zone de résultats pour la détacher du reste */
+#password-feedback {
+    margin-top: 20px;
+    background-color: #f8f9fa;
+    padding: 15px 20px;
+    border-radius: 8px;
+    border: 1px solid #eee;
+}
+
+#password-feedback p {
+    margin: 10px 0;
+    font-size: 1.1rem;
+}
+
+/* Les couleurs demandées par le sujet */
+.bg-red { background-color: #ff4d4d; }
+.bg-orange { background-color: #ffa500; }
+.bg-green { background-color: #4caf50; }
+
+/* Style pour valider les critères */
+#criteria-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+#criteria-list li {
+    color: #888;
+    margin-bottom: 5px;
+    transition: color 0.3s;
+}
+
+/* Cette classe sera ajoutée en JS quand le critère sera respecté */
+#criteria-list li.valid {
+    color: #4caf50;
+    font-weight: bold;
+}
