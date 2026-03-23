@@ -59,3 +59,70 @@ function ceaserBruteforce(messageChiffre) {
     }
 }
     
+function vigenereEncrypt(message, key) {
+    let result = ""
+    key = key.toUpperCase()
+    let keyIndex = 0
+
+    for (let i = 0; i < message.length; i++) {
+        let c = message[i]
+
+        if (c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z') {
+            let keyChar = key[keyIndex % key.length]
+            let shift = keyChar.charCodeAt(0) - 'A'.charCodeAt(0)
+
+            if (c >= 'a' && c <= 'z') {
+                let base = 'a'.charCodeAt(0)
+                let pos = c.charCodeAt(0) - base
+                let newPos = (pos + shift) % 26
+                c = String.fromCharCode(base + newPos)
+
+            } else {
+                let base = 'A'.charCodeAt(0)
+                let pos = c.charCodeAt(0) - base
+                let newPos = (pos + shift) % 26
+                c = String.fromCharCode(base + newPos)
+            }
+
+            keyIndex++ 
+        }
+
+        result = result + c
+    }
+
+    return result
+}
+
+function vigenereDecrypt(message, key) {
+    let result = ""
+    key = key.toUpperCase()
+    let keyIndex = 0
+
+    for (let i = 0; i < message.length; i++) {
+        let c = message[i]
+
+        if (c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z') {
+            let keyChar = key[keyIndex % key.length]
+            let shift = keyChar.charCodeAt(0) - 'A'.charCodeAt(0)
+
+            if (c >= 'a' && c <= 'z') {
+                let base = 'a'.charCodeAt(0)
+                let pos = c.charCodeAt(0) - base
+                let newPos = (pos - shift + 26) % 26
+                c = String.fromCharCode(base + newPos)
+
+            } else {
+                let base = 'A'.charCodeAt(0)
+                let pos = c.charCodeAt(0) - base
+                let newPos = (pos - shift + 26) % 26
+                c = String.fromCharCode(base + newPos)
+            }
+
+            keyIndex++ 
+        }
+
+        result = result + c
+    }
+
+    return result
+}
