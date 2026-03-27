@@ -208,4 +208,4 @@ const quizQuestions = [
         difficulty: "difficile",
         explanation: "C'est une faille critique pour laquelle il n'existe pas encore de correctif."
     }
-];
+]
