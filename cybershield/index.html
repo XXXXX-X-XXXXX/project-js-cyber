@@ -56,11 +56,34 @@
         <section id="module-phishing">
             <h2>Module 3 : Détecteur de Phishing</h2>
             </section>
+
+            <section id="module-dashboard">
+            <h2>Module 4 : Veille en Cybersécurité</h2>
+            
+            <div class="dashboard-header">
+                <div class="alert-level">
+                    Niveau d'alerte global : <span id="alert-badge" class="badge bg-green">Calcul en cours...</span>
+                </div>
+                
+                <div class="dashboard-controls">
+                    <input type="text" id="search-news" placeholder="Rechercher un article...">
+                    <select id="filter-category">
+                        <option value="all">Toutes les sources</option>
+                        </select>
+                </div>
+            </div>
+
+            <div id="news-container" class="news-grid">
+                <p>Chargement des actualités...</p>
+            </div>
+        </section>
+
     </main>
 
     <script src="js/app.js"></script>
     <script src="js/password.js"></script>
     <script src="js/cipher.js"></script>
     <script src="js/phishing.js"></script>
+    <script src="js/dashboard.js"></script> </body>
 </body>
 </html>
