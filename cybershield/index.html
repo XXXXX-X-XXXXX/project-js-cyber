@@ -54,8 +54,43 @@
             </section>
 
         <section id="module-phishing">
-            <h2>Module 3 : Détecteur de Phishing</h2>
-            </section>
+    <h2>Module 3 : Détecteur de Phishing</h2>
+    <p>Testez un e-mail pour évaluer son niveau de dangerosité.</p>
+
+    <div class="phishing-inputs">
+        <div style="margin-bottom: 10px;">
+            <label for="email-sender"><strong>Expéditeur :</strong></label><br>
+            <input type="email" id="email-sender" placeholder="ex: admin@noreply-security.tk" style="width: 100%; padding: 5px;">
+        </div>
+
+        <div style="margin-bottom: 10px;">
+            <label for="email-subject"><strong>Objet de l'e-mail :</strong></label><br>
+            <input type="text" id="email-subject" placeholder="ex: URGENT : Votre compte sera suspendu" style="width: 100%; padding: 5px;">
+        </div>
+
+        <div style="margin-bottom: 10px;">
+            <label for="email-body"><strong>Corps du message :</strong></label><br>
+            <textarea id="email-body" rows="6" placeholder="Collez le texte du message ici..." style="width: 100%; padding: 5px;"></textarea>
+        </div>
+
+        <button id="btn-analyze-phishing" style="padding: 10px 15px; cursor: pointer;">Lancer l'analyse</button>
+    </div>
+
+    <div id="phishing-result" style="margin-top: 20px; padding: 15px; border: 1px solid #ccc; border-radius: 5px;">
+        <h3>Résultat de l'analyse</h3>
+        
+        <p><strong>Score de suspicion :</strong> <span id="phishing-score-display">0</span> / 100</p>
+        
+        <div style="width: 100%; background-color: #e0e0e0; height: 20px; border-radius: 10px; margin-bottom: 15px;">
+            <div id="phishing-score-bar" style="width: 0%; height: 100%; background-color: green; border-radius: 10px; transition: width 0.3s;"></div>
+        </div>
+
+        <h4>Drapeaux rouges détectés :</h4>
+        <ul id="phishing-reasons-list">
+            <li><em>En attente d'une analyse...</em></li>
+        </ul>
+    </div>
+</section>
 
             <section id="module-quiz">
     <h2>Module 5 : Quiz de Sensibilisation</h2>
