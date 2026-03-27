@@ -114,6 +114,13 @@
             </div>
     </div>
 
+    <div id="quiz-setup">
+    <button id="start-btn">Mode Solo</button>
+    <button onclick="startDuel(document.getElementById('difficulty-select').value)" style="background-color: #ff4757; color: white;">
+        Lancer un DUEL (J1 vs J2)
+    </button>
+</div>
+
     <div id="quiz-results" style="display:none; background: #f0f0f0; padding: 20px; margin-top: 20px;">
         <h3>Résultat Final : <span id="final-score">0</span> pts</h3>
         <p id="recommendations" style="font-style: italic; color: blue;"></p>

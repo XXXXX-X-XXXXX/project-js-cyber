@@ -142,3 +142,85 @@ function saveAndDisplayScores(newScore) {
     const historyHTML = history.map(s => `<li>${s.date} - ${s.score} pts</li>`).join('');
     document.getElementById('score-history').innerHTML = historyHTML;
 }
+
+let isDuel = false;
+let currentPlayer = 1;
+let scores = { player1: 0, player2: 0 };
+let duelTurn = 0; // Pour savoir combien de questions ont été posées au total
+
+function startDuel(difficultySelected) {
+    isDuel = true;
+    currentPlayer = 1;
+    scores = { player1: 0, player2: 0 };
+    duelTurn = 0;
+
+    // On filtre et on prend 10 questions (5 chacun)
+    const filtered = difficultySelected === 'tous' 
+        ? quizQuestions 
+        : quizQuestions.filter(q => q.difficulty === difficultySelected);
+    
+    currentQuestions = [...filtered].sort(() => 0.5 - Math.random()).slice(0, 10);
+
+    document.getElementById('quiz-setup').style.display = 'none';
+    document.getElementById('quiz-game-area').style.display = 'block';
+    
+    updateDuelUI();
+    showNextQuestion();
+}
+
+function updateDuelUI() {
+    const timerDisp = document.getElementById('timer-display');
+    timerDisp.innerHTML = `
+        <div style="display:flex; justify-content:space-around; width:100%">
+            <span style="color: ${currentPlayer === 1 ? 'red' : 'black'}">J1: ${scores.player1} pts</span>
+            <span id="countdown">15s</span>
+            <span style="color: ${currentPlayer === 2 ? 'blue' : 'black'}">J2: ${scores.player2} pts</span>
+        </div>
+        <center><h3>Tour du Joueur ${currentPlayer}</h3></center>
+    `;
+}
+
+// Modifie ta fonction handleAnswer existante pour inclure ceci :
+function handleAnswer(selectedIndex, questionObj) {
+    clearInterval(timer);
+    
+    if (selectedIndex === questionObj.correctAnswer) {
+        let points = 10; // On simplifie un peu pour le duel
+        if (isDuel) {
+            if (currentPlayer === 1) scores.player1 += points;
+            else scores.player2 += points;
+        } else {
+            score += points;
+        }
+    }
+
+    if (isDuel) {
+        // Alterne le joueur
+        currentPlayer = (currentPlayer === 1) ? 2 : 1;
+        currentIndex++;
+        if (currentIndex < currentQuestions.length) {
+            updateDuelUI();
+            showNextQuestion();
+        } else {
+            endDuel();
+        }
+    } else {
+        currentIndex++;
+        showNextQuestion();
+    }
+}
+
+function endDuel() {
+    document.getElementById('quiz-game-area').style.display = 'none';
+    document.getElementById('quiz-results').style.display = 'block';
+    
+    let winnerText = "";
+    if (scores.player1 > scores.player2) winnerText = "🏆 Victoire du Joueur 1 !";
+    else if (scores.player2 > scores.player1) winnerText = "🏆 Victoire du Joueur 2 !";
+    else winnerText = "🤝 Égalité !";
+
+    document.getElementById('final-score').innerHTML = `
+        ${winnerText} <br>
+        Score J1 : ${scores.player1} | Score J2 : ${scores.player2}
+    `;
+}
