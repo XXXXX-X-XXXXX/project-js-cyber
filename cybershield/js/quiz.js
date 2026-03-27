@@ -1,3 +1,24 @@
+// On attend que la page soit totalement chargée
+window.addEventListener('DOMContentLoaded', () => {
+    const startBtn = document.getElementById('start-btn');
+    
+    if (startBtn) {
+        startBtn.addEventListener('click', () => {
+            const level = document.getElementById('difficulty-select').value;
+            console.log("Bouton cliqué ! Niveau choisi :", level);
+            startQuiz(level);
+        });
+    } else {
+        console.error("ERREUR : Le bouton start-btn n'a pas été trouvé dans le HTML");
+    }
+});
+
+// Vérifie aussi que tes données sont bien chargées
+if (typeof quizQuestions === 'undefined') {
+    console.error("ERREUR : Les questions du quiz (quizQuestions) ne sont pas chargées. Vérifie l'ordre des scripts dans ton HTML.");
+}
+
+
 /* MODULE 5 : Quiz Interactif CyberShield - VERSION FINALE CERTIFIÉE */
 
 let currentQuestions = [];
