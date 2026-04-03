@@ -1,101 +1,514 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #0084ff 0%, #0066cc 100%);
     color: #333;
-    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
-section {
+/* ========== HEADER ========== */
+header {
     background: white;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     padding: 20px;
-    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.header-content h1 {
+    color: #d63031;
+    font-size: 2.5em;
+    margin-bottom: 5px;
+}
+
+.header-content p {
+    color: #666;
+    font-size: 0.95em;
+}
+
+.btn-home {
+    padding: 10px 20px;
+    background-color: #667eea;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+
+.btn-home:hover {
+    background-color: #764ba2;
+    transform: translateY(-2px);
+}
+
+/* ========== MAIN ========== */
+main {
+    flex: 1;
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* ========== HOME PAGE ========== */
+.home-container {
+    animation: fadeIn 0.5s ease-in;
+}
+
+.welcome-section {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 40px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.welcome-section h2 {
+    color: #d63031;
+    font-size: 2em;
+    margin-bottom: 15px;
+}
+
+.welcome-section p {
+    color: #666;
+    font-size: 1.1em;
+    margin-bottom: 10px;
+}
+
+.modules-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.module-card {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.module-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.module-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.module-card:hover::before {
+    left: 100%;
+}
+
+.module-icon {
+    font-size: 3em;
+    margin-bottom: 15px;
+}
+
+.module-card h3 {
+    color: #d63031;
+    margin-bottom: 10px;
+    font-size: 1.3em;
+}
+
+.module-card p {
+    color: #666;
+    font-size: 0.95em;
+    margin-bottom: 15px;
+}
+
+.module-arrow {
+    color: #667eea;
+    font-size: 1.5em;
+    font-weight: bold;
+    transition: transform 0.3s ease;
+}
+
+.module-card:hover .module-arrow {
+    transform: translateX(5px);
+}
+
+/* ========== MODULE PAGE ========== */
+.module-container {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    animation: slideUp 0.5s ease-in;
+}
+
+.module-container h2 {
+    color: #d63031;
+    font-size: 2em;
+    margin-bottom: 30px;
+    border-bottom: 3px solid #667eea;
+    padding-bottom: 15px;
+}
+
+/* ========== CIPHER TABS ========== */
+.cipher-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.tab-btn {
+    padding: 12px 25px;
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    color: #666;
+    transition: all 0.3s ease;
+}
+
+.tab-btn:hover {
+    color: #667eea;
+}
+
+.tab-btn.active {
+    color: #d63031;
+    border-bottom-color: #d63031;
+}
+
+.tab-content {
+    display: none;
+    animation: fadeIn 0.3s ease-in;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.tab-content h3 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 1.4em;
+}
+
+.tab-content > p {
+    color: #666;
+    margin-bottom: 25px;
+    font-size: 0.95em;
+}
+
+/* ========== FORM GROUPS ========== */
+.input-group,
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 25px;
+}
+
+.input-group label,
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #333;
+    font-size: 1em;
+}
+
+#password-input,
+#caesar-message,
+#caesar-shift,
+#vigenere-message,
+#vigenere-key {
+    padding: 12px 15px;
+    font-size: 16px;
+    border: 2px solid #e0e0e0;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    font-family: inherit;
 }
 
-h1, h2 {
-    color: #2c3e50;
+#password-input:focus,
+#caesar-message:focus,
+#caesar-shift:focus,
+#vigenere-message:focus,
+#vigenere-key:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 8px rgba(102, 126, 234, 0.3);
 }
 
-/* --- MODULE 1 : ANALYSEUR DE MOT DE PASSE --- */
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* ========== PROGRESS BAR ========== */
 .progress-container {
     width: 100%;
     background-color: #e0e0e0;
     border-radius: 8px;
-    height: 20px;
-    margin: 15px 0;
+    height: 25px;
+    margin: 20px 0;
     overflow: hidden;
 }
 
 .progress-bar {
     height: 100%;
-    width: 0%; /* Par défaut, la barre est vide */
+    width: 0%;
     transition: width 0.3s ease, background-color 0.3s ease;
-}
-
-/* --- AMÉLIORATION DU MODULE 1 --- */
-
-/* Groupe label + input */
-.input-group {
-    display: flex;
-    flex-direction: column; /* Place le texte au-dessus du champ */
-    margin-bottom: 20px;
-}
-
-.input-group label {
-    font-weight: bold;
-    margin-bottom: 8px;
-    color: #2c3e50;
-    font-size: 1.1rem;
-}
-
-/* Le champ de saisie du mot de passe */
-#password-input {
-    width: 100%; /* Prend toute la largeur de son conteneur */
-    max-width: 400px; /* Évite qu'il soit gigantesque sur grand écran */
-    padding: 12px 15px; /* Aère l'intérieur (corrige le texte coupé) */
-    font-size: 16px;
-    border: 2px solid #e0e0e0;
-    border-radius: 8px; /* Bords arrondis */
-    transition: all 0.3s ease; /* Animation fluide */
-}
-
-/* Effet quand l'utilisateur clique dans le champ (focus) */
-#password-input:focus {
-    outline: none;
-    border-color: #3498db; /* Un joli bleu moderne */
-    box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
-}
-
-/* Encadrement de la zone de résultats pour la détacher du reste */
-#password-feedback {
-    margin-top: 20px;
-    background-color: #f8f9fa;
-    padding: 15px 20px;
     border-radius: 8px;
-    border: 1px solid #eee;
 }
 
-#password-feedback p {
-    margin: 10px 0;
-    font-size: 1.1rem;
+.bg-red { background: linear-gradient(90deg, #ff6b6b, #d63031); }
+.bg-orange { background: linear-gradient(90deg, #ffa500, #ff8c00); }
+.bg-green { background: linear-gradient(90deg, #51cf66, #2f9e44); }
+
+/* ========== FEEDBACK & RESULTS ========== */
+#password-feedback,
+.result-box,
+.bruteforce-box {
+    margin-top: 30px;
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 4px solid #667eea;
 }
 
-/* Les couleurs demandées par le sujet */
-.bg-red { background-color: #ff4d4d; }
-.bg-orange { background-color: #ffa500; }
-.bg-green { background-color: #4caf50; }
+#password-feedback p,
+.result-box p,
+.bruteforce-box p {
+    margin: 12px 0;
+    font-size: 1em;
+    color: #333;
+}
 
-/* Style pour valider les critères */
+#password-feedback h4,
+.result-box h4,
+.bruteforce-box h4 {
+    color: #d63031;
+    margin-bottom: 12px;
+    font-size: 1.1em;
+}
+
 #criteria-list {
-    list-style-type: none;
+    list-style: none;
     padding: 0;
+    margin-top: 15px;
 }
 
 #criteria-list li {
-    color: #888;
-    margin-bottom: 5px;
-    transition: color 0.3s;
+    color: #999;
+    margin: 8px 0;
+    padding-left: 20px;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+#criteria-list li::before {
+    content: '○';
+    position: absolute;
+    left: 0;
+    color: #d63031;
+}
+
+#criteria-list li.valid {
+    color: #27ae60;
+    font-weight: bold;
+}
+
+#criteria-list li.valid::before {
+    content: '✓';
+    color: #27ae60;
+}
+
+#caesar-output,
+#vigenere-output {
+    background: white;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    word-break: break-all;
+    font-family: 'Courier New', monospace;
+    min-height: 50px;
+    color: #667eea;
+    font-weight: bold;
+}
+
+/* ========== BUTTONS ========== */
+.button-group {
+    display: flex;
+    gap: 15px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.btn-action {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex: 1;
+    min-width: 150px;
+}
+
+.btn-encrypt {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+}
+
+.btn-encrypt:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.btn-decrypt {
+    background: linear-gradient(135deg, #f093fb, #f5576c);
+    color: white;
+}
+
+.btn-decrypt:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(245, 87, 108, 0.4);
+}
+
+#caesar-bruteforce-btn {
+    background: linear-gradient(135deg, #4facfe, #00f2fe);
+    color: white;
+    width: 100%;
+}
+
+#caesar-bruteforce-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(79, 172, 254, 0.4);
+}
+
+/* ========== BRUTEFORCE RESULTS ========== */
+#caesar-bruteforce-results {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+}
+
+.bruteforce-item {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 4px solid #4facfe;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+}
+
+.bruteforce-item strong {
+    color: #667eea;
+}
+
+.bruteforce-item code {
+    display: block;
+    margin-top: 8px;
+    word-break: break-all;
+    color: #333;
+}
+
+/* ========== FOOTER ========== */
+footer {
+    background: white;
+    text-align: center;
+    padding: 20px;
+    color: #666;
+    border-top: 1px solid #e0e0e0;
+    margin-top: auto;
+}
+
+footer p {
+    margin: 0;
+}
+
+/* ========== ANIMATIONS ========== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+
+    .header-content h1 {
+        font-size: 2em;
+    }
+
+    .module-container {
+        padding: 20px;
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+
+    .btn-action {
+        min-width: 100%;
+    }
+
+    .modules-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cipher-tabs {
+        flex-direction: column;
+    }
+
+    .tab-btn {
+        width: 100%;
+        text-align: left;
+    }
 }
 
 /* Cette classe sera ajoutée en JS quand le critère sera respecté */
