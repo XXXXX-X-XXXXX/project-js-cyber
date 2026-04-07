@@ -155,7 +155,23 @@
 
         <section id="module-dashboard" class="module-container">
             <h2>📊 Module 4 : Dashboard de Veille en Cybersécurité</h2>
-            <p>Ce module est en cours de développement...</p>
+            
+            <div class="dashboard-header">
+                <div class="alert-level">
+                    Niveau d'alerte global : <span id="alert-badge" class="badge bg-green">Calcul en cours...</span>
+                </div>
+                
+                <div class="dashboard-controls">
+                    <input type="text" id="search-news" placeholder="Rechercher un article...">
+                    <select id="filter-category">
+                        <option value="all">Toutes les sources</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="news-container" class="news-grid">
+                <p>Chargement des actualités...</p>
+            </div>
         </section>
 
             <section id="module-quiz">
@@ -202,6 +218,7 @@
     <script src="js/cipher.js"></script>
     <script src="js/cipher-dom.js"></script>
     <script src="js/phishingg.js"></script>
+    <script src="js/dashboard.js"></script>
     <script src="js/quiz-data.js"></script>
 <script src="js/quiz.js"></script>
 </body>
