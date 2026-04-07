@@ -1,138 +1,672 @@
-/* --- STYLES GÉNÉRAUX --- */
+/* ================================================================
+   CYBERSHIELD — Design System
+   Inspiré du diapo : fond noir, typographie bold, accents irisés
+   ================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Space+Mono:wght@400;700&display=swap');
+
+/* ── VARIABLES ─────────────────────────────────────────────────── */
+:root {
+  --bg-void:        #080808;
+  --bg-card:        #0f0f0f;
+  --bg-elevated:    #161616;
+  --bg-input:       #111111;
+
+  --border-subtle:  rgba(255,255,255,0.07);
+  --border-glow:    rgba(255,255,255,0.18);
+
+  --text-primary:   #f0f0f0;
+  --text-muted:     #555;
+  --text-dim:       #888;
+
+  /* Accents irisés tirés du visuel */
+  --accent-cyan:    #00e5ff;
+  --accent-violet:  #c77dff;
+  --accent-green:   #39ff88;
+  --accent-orange:  #ff8c42;
+  --accent-red:     #ff3b5c;
+
+  --gradient-iris:  linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-violet) 50%, var(--accent-orange) 100%);
+  --gradient-card:  linear-gradient(160deg, #181818 0%, #0c0c0c 100%);
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+
+  --font-display: 'Syne', sans-serif;
+  --font-mono:    'Space Mono', monospace;
+
+  --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── RESET & BASE ───────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
-    color: #333;
-    padding: 20px;
+  font-family: var(--font-display);
+  background-color: var(--bg-void);
+  color: var(--text-primary);
+  padding: 40px 24px 80px;
+  min-height: 100vh;
+  /* Grain subtil */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+}
+
+/* ── HEADER ─────────────────────────────────────────────────────── */
+header {
+  text-align: center;
+  padding: 60px 0 48px;
+}
+
+header h1 {
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  background: var(--gradient-iris);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+}
+
+header p {
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-top: 12px;
+}
+
+/* ── SECTIONS / CARDS ───────────────────────────────────────────── */
+main {
+  max-width: 860px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
 }
 
 section {
-    background: white;
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  background: var(--gradient-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 36px 40px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color var(--transition);
 }
 
-h1, h2 {
-    color: #2c3e50;
+/* Trait irisé en haut de chaque section */
+section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--gradient-iris);
+  opacity: 0.6;
 }
 
-/* --- UTILITAIRES --- */
-.hidden {
-    display: none; /* Permet de masquer l'icône non utilisée en JS */
+section:hover {
+  border-color: var(--border-glow);
 }
 
-/* --- MODULE 1 : ANALYSEUR DE MOT DE PASSE --- */
-
-/* Barre de progression [cite: 54] */
-.progress-container {
-    width: 100%;
-    background-color: #e0e0e0;
-    border-radius: 8px;
-    height: 20px;
-    margin: 15px 0;
-    overflow: hidden;
+section h2 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-primary);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.progress-bar {
-    height: 100%;
-    width: 0%; 
-    transition: width 0.3s ease, background-color 0.3s ease;
+section h2::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--gradient-iris);
+  flex-shrink: 0;
 }
 
-/* Couleurs de la barre demandées par le sujet [cite: 54] */
-.bg-red { background-color: #ff4d4d; }
-.bg-orange { background-color: #ffa500; }
-.bg-green { background-color: #4caf50; }
+/* ── UTILITAIRES ────────────────────────────────────────────────── */
+.hidden { display: none; }
 
-/* Interface de saisie */
+/* ── MODULE 1 : MOT DE PASSE ────────────────────────────────────── */
+
 .input-group {
-    display: flex;
-    flex-direction: column; 
-    margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24px;
 }
 
 .input-group label {
-    font-weight: bold;
-    margin-bottom: 8px;
-    color: #2c3e50;
-    font-size: 1.1rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 10px;
 }
 
 .password-wrapper {
-    position: relative;
-    width: 100%;
-    max-width: 400px;
+  position: relative;
+  width: 100%;
+  max-width: 480px;
 }
 
 #password-input {
-    width: 100%; 
-    padding: 12px 40px 12px 15px; /* Espace à droite pour l'icône */
-    font-size: 16px;
-    border: 2px solid #e0e0e0;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-    box-sizing: border-box; /* Évite que le padding n'élargisse le champ */
+  width: 100%;
+  padding: 14px 48px 14px 18px;
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition);
+  letter-spacing: 0.08em;
 }
+
+#password-input::placeholder { color: var(--text-muted); }
 
 #password-input:focus {
-    outline: none;
-    border-color: #3498db;
-    box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 0 3px rgba(0, 229, 255, 0.12), 0 0 20px rgba(0, 229, 255, 0.08);
 }
 
-/* Bouton de l'œil (SVG) */
 #toggle-password {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
 }
 
-#toggle-password svg {
-    stroke: #000; /* Force l'icône en noir pur */
-    transition: stroke 0.2s;
+#toggle-password svg { stroke: var(--text-muted); transition: stroke var(--transition); }
+#toggle-password:hover svg { stroke: var(--accent-cyan); }
+
+/* Barre de progression */
+.progress-container {
+  width: 100%;
+  background: var(--bg-elevated);
+  border-radius: 999px;
+  height: 6px;
+  margin: 20px 0;
+  overflow: hidden;
 }
 
-#toggle-password:hover svg {
-    stroke: #3498db; /* Devient bleu au survol */
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  border-radius: 999px;
+  transition: width 0.4s ease, background-color 0.4s ease;
+  background: var(--gradient-iris);
 }
 
-/* Zone de résultats et critères  */
+.bg-red    { background: var(--accent-red) !important; }
+.bg-orange { background: var(--accent-orange) !important; }
+.bg-green  {
+  background: var(--gradient-iris) !important;
+  box-shadow: 0 0 12px rgba(57, 255, 136, 0.4);
+}
+
+/* Feedback */
 #password-feedback {
-    margin-top: 20px;
-    background-color: #f8f9fa;
-    padding: 15px 20px;
-    border-radius: 8px;
-    border: 1px solid #eee;
+  margin-top: 20px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 20px 24px;
 }
 
 #password-feedback p {
-    margin: 10px 0;
-    font-size: 1.1rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  margin-bottom: 6px;
+}
+
+#password-feedback p span {
+  color: var(--text-primary);
+  font-weight: 700;
 }
 
 #criteria-list {
-    list-style-type: none;
-    padding: 0;
+  list-style: none;
+  padding: 0;
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
 }
 
 #criteria-list li {
-    color: #888;
-    margin-bottom: 5px;
-    transition: color 0.3s;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  background: rgba(255,255,255,0.02);
+  transition: all var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  letter-spacing: 0.03em;
 }
 
-/* Validation visuelle des critères  */
+#criteria-list li::before {
+  content: '○';
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  flex-shrink: 0;
+}
+
 #criteria-list li.valid {
-    color: #4caf50;
-    font-weight: bold;
+  color: var(--accent-green);
+  border-color: rgba(57, 255, 136, 0.2);
+  background: rgba(57, 255, 136, 0.05);
+}
+
+#criteria-list li.valid::before { content: '●'; color: var(--accent-green); }
+
+/* ── MODULE 3 : PHISHING ────────────────────────────────────────── */
+
+#module-phishing > p {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  letter-spacing: 0.05em;
+  margin-bottom: 28px;
+}
+
+.phishing-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.phishing-inputs label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+/* Override inline styles on phishing inputs */
+#email-sender,
+#email-subject,
+#email-body {
+  width: 100% !important;
+  padding: 13px 16px !important;
+  font-family: var(--font-mono) !important;
+  font-size: 0.88rem !important;
+  background: var(--bg-input) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: var(--radius-md) !important;
+  color: var(--text-primary) !important;
+  outline: none !important;
+  transition: border-color var(--transition), box-shadow var(--transition) !important;
+  resize: vertical;
+}
+
+#email-sender::placeholder,
+#email-subject::placeholder,
+#email-body::placeholder { color: var(--text-muted) !important; }
+
+#email-sender:focus,
+#email-subject:focus,
+#email-body:focus {
+  border-color: var(--accent-violet) !important;
+  box-shadow: 0 0 0 3px rgba(199, 125, 255, 0.1) !important;
+}
+
+/* ── BOUTONS ────────────────────────────────────────────────────── */
+
+#btn-analyze-phishing,
+#start-btn,
+button[onclick*="startDuel"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 28px !important;
+  font-family: var(--font-mono) !important;
+  font-size: 0.8rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  border-radius: var(--radius-md) !important;
+  cursor: pointer !important;
+  transition: all var(--transition) !important;
+  border: none !important;
+}
+
+#btn-analyze-phishing,
+#start-btn {
+  background: var(--bg-elevated) !important;
+  color: var(--accent-cyan) !important;
+  border: 1px solid rgba(0, 229, 255, 0.3) !important;
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.05) !important;
+}
+
+#btn-analyze-phishing:hover,
+#start-btn:hover {
+  background: rgba(0, 229, 255, 0.08) !important;
+  border-color: var(--accent-cyan) !important;
+  box-shadow: 0 0 24px rgba(0, 229, 255, 0.2) !important;
+  transform: translateY(-1px) !important;
+}
+
+button[onclick*="startDuel"] {
+  background: rgba(255, 59, 92, 0.08) !important;
+  color: var(--accent-red) !important;
+  border: 1px solid rgba(255, 59, 92, 0.35) !important;
+}
+
+button[onclick*="startDuel"]:hover {
+  background: rgba(255, 59, 92, 0.15) !important;
+  box-shadow: 0 0 24px rgba(255, 59, 92, 0.2) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Bouton recommencer */
+button[onclick="location.reload()"] {
+  padding: 11px 24px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: transparent;
+  color: var(--text-dim);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+button[onclick="location.reload()"]:hover {
+  color: var(--text-primary);
+  border-color: var(--border-glow);
+}
+
+/* ── RÉSULTAT PHISHING ──────────────────────────────────────────── */
+
+#phishing-result {
+  margin-top: 28px !important;
+  padding: 24px !important;
+  background: var(--bg-elevated) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: var(--radius-md) !important;
+}
+
+#phishing-result h3 {
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 20px;
+}
+
+#phishing-result p {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  margin-bottom: 10px;
+}
+
+#phishing-score-display {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  font-family: var(--font-display);
+  vertical-align: middle;
+}
+
+/* Override inline bar styles */
+#phishing-result > div {
+  width: 100% !important;
+  background: var(--bg-void) !important;
+  height: 6px !important;
+  border-radius: 999px !important;
+  margin-bottom: 24px !important;
+  overflow: hidden;
+}
+
+#phishing-score-bar {
+  height: 100% !important;
+  border-radius: 999px !important;
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+#phishing-result h4 {
+  font-size: 0.72rem;
+  font-family: var(--font-mono);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 12px;
+}
+
+#phishing-reasons-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#phishing-reasons-list li {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  background: rgba(255,255,255,0.02);
+  border-left: 2px solid var(--border-subtle);
+  line-height: 1.5;
+  transition: all var(--transition);
+}
+
+#phishing-reasons-list li:not(:has(em)) {
+  color: var(--accent-orange);
+  border-left-color: var(--accent-orange);
+  background: rgba(255, 140, 66, 0.05);
+}
+
+#phishing-reasons-list li em { color: var(--text-muted); font-style: italic; }
+
+/* ALERTE haute sévérité */
+#phishing-reasons-list li:has(strong),
+#phishing-reasons-list li[data-alert="true"] {
+  color: var(--accent-red);
+  border-left-color: var(--accent-red);
+  background: rgba(255, 59, 92, 0.07);
+}
+
+/* ── MODULE QUIZ ────────────────────────────────────────────────── */
+
+#quiz-setup {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+}
+
+#quiz-setup p {
+  width: 100%;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  letter-spacing: 0.05em;
+}
+
+#difficulty-select {
+  padding: 12px 16px;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  cursor: pointer;
+  outline: none;
+  transition: border-color var(--transition);
+  appearance: none;
+  padding-right: 36px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%23555' stroke-width='2'%3E%3Cpath d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+}
+
+#difficulty-select:focus { border-color: var(--accent-cyan); }
+
+/* Zone de jeu */
+#quiz-game-area {
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: var(--radius-md) !important;
+  padding: 28px !important;
+  margin-top: 24px !important;
+  background: var(--bg-elevated) !important;
+  display: none;
+}
+
+#timer-display {
+  font-family: var(--font-mono) !important;
+  font-size: 0.78rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.12em !important;
+  color: var(--accent-cyan) !important;
+  text-transform: uppercase !important;
+  margin-bottom: 20px !important;
+}
+
+#quiz-question {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+
+#quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#quiz-options button {
+  width: 100%;
+  text-align: left;
+  padding: 14px 20px;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all var(--transition);
+  letter-spacing: 0.03em;
+}
+
+#quiz-options button:hover {
+  background: rgba(0, 229, 255, 0.06);
+  border-color: rgba(0, 229, 255, 0.35);
+  color: var(--accent-cyan);
+  transform: translateX(4px);
+}
+
+/* Résultats */
+#quiz-results {
+  background: var(--bg-elevated) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: var(--radius-md) !important;
+  padding: 28px !important;
+  margin-top: 24px !important;
+}
+
+#quiz-results h3 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  margin-bottom: 10px;
+}
+
+#final-score {
+  background: var(--gradient-iris);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+#recommendations {
+  font-family: var(--font-mono) !important;
+  font-size: 0.8rem !important;
+  color: var(--accent-violet) !important;
+  font-style: normal !important;
+  line-height: 1.6 !important;
+  margin: 14px 0 !important;
+}
+
+#quiz-results h4 {
+  font-size: 0.72rem;
+  font-family: var(--font-mono);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin: 20px 0 12px;
+}
+
+#score-history {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 20px;
+}
+
+#score-history li {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  padding: 8px 14px;
+  background: rgba(255,255,255,0.02);
+  border-radius: var(--radius-sm);
+  border-left: 2px solid var(--border-subtle);
+}
+
+#score-history li:first-child {
+  color: var(--accent-cyan);
+  border-left-color: var(--accent-cyan);
+}
+
+/* ── RESPONSIVE ─────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  body { padding: 20px 16px 60px; }
+  section { padding: 24px 20px; }
+  header h1 { font-size: 2.8rem; }
 }
