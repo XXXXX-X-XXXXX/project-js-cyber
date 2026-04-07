@@ -80,6 +80,18 @@ const critNumber = document.getElementById('crit-number');
 const critSymbol = document.getElementById('crit-symbol');
 const critBlacklist = document.getElementById('crit-blacklist');
 
+// Toggle password visibility
+const togglePasswordBtn = document.getElementById('toggle-password');
+const iconEyeClosed = document.getElementById('icon-eye-closed');
+const iconEyeOpen = document.getElementById('icon-eye-open');
+
+togglePasswordBtn.addEventListener('click', function() {
+    const isPassword = passwordInput.type === 'password';
+    passwordInput.type = isPassword ? 'text' : 'password';
+    iconEyeClosed.classList.toggle('hidden', !isPassword);
+    iconEyeOpen.classList.toggle('hidden', isPassword);
+});
+
 // Écouteur d'événement : se déclenche à chaque frappe
 passwordInput.addEventListener('input', function(event) {
     const currentPassword = event.target.value;

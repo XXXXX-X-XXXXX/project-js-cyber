@@ -49,9 +49,70 @@
 </div>
             </section>
 
-        <section id="module-cipher">
-            <h2>Module 2 : Chiffrement César</h2>
-            </section>
+        <section id="module-cipher" class="module-container">
+            <h2>🔐 Module 2 : Chiffrement César & Vigenère</h2>
+            
+            <div class="cipher-tabs">
+                <button class="tab-btn active" data-tab="caesar">Chiffrement César</button>
+                <button class="tab-btn" data-tab="vigenere">Chiffrement Vigenère</button>
+            </div>
+
+            <div id="caesar-tab" class="tab-content active">
+                <h3>Chiffrement César</h3>
+                <p>Le chiffrement César décale chaque lettre d'un nombre fixe de positions dans l'alphabet.</p>
+                
+                <div class="form-group">
+                    <label for="caesar-message">Message à chiffrer :</label>
+                    <textarea id="caesar-message" placeholder="Saisissez votre message..." rows="4"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="caesar-shift">Décalage (1-25) :</label>
+                    <input type="number" id="caesar-shift" min="1" max="25" value="3">
+                </div>
+
+                <div class="button-group">
+                    <button id="caesar-encrypt-btn" class="btn-action btn-encrypt">Chiffrer</button>
+                    <button id="caesar-decrypt-btn" class="btn-action btn-decrypt">Déchiffrer</button>
+                </div>
+
+                <div id="caesar-result" class="result-box">
+                    <h4>Résultat :</h4>
+                    <p id="caesar-output"></p>
+                </div>
+
+                <div id="caesar-bruteforce" class="bruteforce-box">
+                    <h4>Force brute (25 possibilités) :</h4>
+                    <button id="caesar-bruteforce-btn" class="btn-action">Essayer tous les décalages</button>
+                    <div id="caesar-bruteforce-results"></div>
+                </div>
+            </div>
+
+            <div id="vigenere-tab" class="tab-content">
+                <h3>Chiffrement Vigenère</h3>
+                <p>Variante du César utilisant une clé pour des décalages variables.</p>
+                
+                <div class="form-group">
+                    <label for="vigenere-message">Message à chiffrer :</label>
+                    <textarea id="vigenere-message" placeholder="Saisissez votre message..." rows="4"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="vigenere-key">Clé de chiffrement :</label>
+                    <input type="text" id="vigenere-key" placeholder="Ex: SECRET" maxlength="50">
+                </div>
+
+                <div class="button-group">
+                    <button id="vigenere-encrypt-btn" class="btn-action btn-encrypt">Chiffrer</button>
+                    <button id="vigenere-decrypt-btn" class="btn-action btn-decrypt">Déchiffrer</button>
+                </div>
+
+                <div id="vigenere-result" class="result-box">
+                    <h4>Résultat :</h4>
+                    <p id="vigenere-output"></p>
+                </div>
+            </div>
+        </section>
 
         <section id="module-phishing">
     <h2>Module 3 : Détecteur de Phishing</h2>
@@ -91,6 +152,11 @@
         </ul>
     </div>
 </section>
+
+        <section id="module-dashboard" class="module-container">
+            <h2>📊 Module 4 : Dashboard de Veille en Cybersécurité</h2>
+            <p>Ce module est en cours de développement...</p>
+        </section>
 
             <section id="module-quiz">
     <h2>Module 5 : Quiz de Sensibilisation</h2>
@@ -134,6 +200,7 @@
     <script src="js/app.js"></script>
     <script src="js/password.js"></script>
     <script src="js/cipher.js"></script>
+    <script src="js/cipher-dom.js"></script>
     <script src="js/phishingg.js"></script>
     <script src="js/quiz-data.js"></script>
 <script src="js/quiz.js"></script>
